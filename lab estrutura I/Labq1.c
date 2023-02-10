@@ -30,7 +30,7 @@ int main() {
 }
 
 
-void preencher(df *f,qtd) {
+void preencher(df *f,int qtd) {
     int i;
     for(i =0; i<qtd; i++) {
         printf("nome do %d° funcionário \n", i+1);
@@ -45,7 +45,7 @@ void preencher(df *f,qtd) {
     }
 }
 
-void imprimir(df *f,qtd) {
+void imprimir(df *f,int qtd) {
     int i;
 
     for(i =0; i<qtd; i++) {
@@ -58,7 +58,7 @@ void imprimir(df *f,qtd) {
     }
 }
 
-void modifica_salario(df *f,qtd) {
+void modifica_salario(df *f,int qtd) {
     int i,op;
 
     printf("deseja muda o salario do funcionario se sim digite 1 se nao digite 0: ");
