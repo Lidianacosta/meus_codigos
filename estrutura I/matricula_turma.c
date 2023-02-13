@@ -147,6 +147,7 @@ Turma *cria_turma(char id)
     Turma *turma;
    // ERRO COMEÇA A AQUI !
    turma->id = id;
+  
     
     turma->vagas = MAX_VAGAS;
     for (count = 0; count < MAX_VAGAS; count++)
@@ -172,7 +173,13 @@ void imprime_alunos(Turma *turma)
 }
 
 void imprime_turmas(Turma **turmas, int n)
-{
+int i;
+    for(i = 0; i < MAX_TURMAS; i++)
+    {
+        printf("");
+    }
+    
+
 }
 
 Turma *procura_turma(Turma **turmas, int n, char id)
