@@ -63,8 +63,9 @@ int main()
             if (i < MAX_TURMAS)
             {
                 printf("digite o id da turma que deseja cadastrar: ");
-                scanf(" %c", turmas[i]->id);
-                turmas[i] = cria_turma(turmas[i]->id);
+                scanf(" %c", &id);
+                fflush(stdin);
+                turmas[i] = cria_turma(id);
             }
             else
             {
@@ -142,9 +143,12 @@ void menu(void)
 Turma *cria_turma(char id)
 {
     int count;
+    
     Turma *turma;
-    turma->id = id;
-    turma->vagas = NULL;
+   // ERRO COMEÇA A AQUI !
+   turma->id = id;
+    
+    turma->vagas = MAX_VAGAS;
     for (count = 0; count < MAX_VAGAS; count++)
     {
         turma->alunos[count] = NULL;
@@ -157,6 +161,7 @@ void matricula_aluno(Turma *turma, int mat, char *nome)
 {
     printf("digite o nome do aluno : ");
     scanf(" %[^\n]s", nome);
+     fflush(stdin);
 }
 
 void lanca_notas(Turma *turma)
