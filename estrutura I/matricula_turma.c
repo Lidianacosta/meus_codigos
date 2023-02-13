@@ -172,11 +172,14 @@ void imprime_alunos(Turma *turma)
 {
 }
 
-void imprime_turmas(Turma **turmas, int n)
-int i;
+void imprime_turmas(Turma **turmas, int n){
+ int i;
     for(i = 0; i < MAX_TURMAS; i++)
     {
+        printf("TURMAS: \n");
+        printf("Turma: %s",(*turmas)->id);
         printf("");
+
     }
     
 
