@@ -64,7 +64,7 @@ int main()
             {
                 printf("digite o id da turma que deseja cadastrar: ");
                 scanf(" %c", &id);
-                fflush(stdin);
+                
                 turmas[i] = cria_turma(id);
             }
             else
@@ -112,6 +112,7 @@ int main()
 
             break;
         case 5:
+        imprime_turmas(turmas, i);
 
             break;
         }
@@ -146,7 +147,7 @@ Turma *cria_turma(char id)
     
     Turma *turma;
    // ERRO COMEÇA A AQUI !
-   turma->id = id;
+   (*turma).id = id;
   
     
     turma->vagas = MAX_VAGAS;
@@ -155,14 +156,13 @@ Turma *cria_turma(char id)
         turma->alunos[count] = NULL;
     }
     printf("Turma %c criada com sucesso!", id);
-    return (turma);
+    return &(*turma);
 }
 
 void matricula_aluno(Turma *turma, int mat, char *nome)
 {
     printf("digite o nome do aluno : ");
     scanf(" %[^\n]s", nome);
-     fflush(stdin);
 }
 
 void lanca_notas(Turma *turma)
@@ -173,16 +173,21 @@ void imprime_alunos(Turma *turma)
 }
 
 void imprime_turmas(Turma **turmas, int n){
- int i;
-    for(i = 0; i < MAX_TURMAS; i++)
+ int i,count_alunos,count_notas;
+    for(i = 0; i < n; i++)
     {
         printf("TURMAS: \n");
-        printf("Turma: %s",(*turmas)->id);
-        printf("");
-
+        //printf("Turma: %s",turmas[i]->id);
+        for(count_alunos = 0; count_alunos < MAX_VAGAS; count_alunos++){
+             printf("aluno : %s",turmas[i]->alunos[count_alunos]->nome);
+          for(count_notas = 0; count_notas < 3; count_notas++){
+             printf("notas: %.2f",turmas[i]->alunos[count_alunos]->notas[count_notas]);
+        }
+        printf("media: %.2f",turmas[i]->alunos[count_alunos]->media);
+        }
+       // printf("");
+        //printf("");
     }
-    
-
 }
 
 Turma *procura_turma(Turma **turmas, int n, char id)
