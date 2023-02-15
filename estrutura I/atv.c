@@ -10,43 +10,40 @@
 // c) determine a porcentagem de pessoas do sexo masculino que responderam que não
 // gostaram do produto.
 
-
 #include<stdio.h>
 #include<stdlib.h>
 
 int main(){
 
-int n,i,contf = 0,contm = 0;
+int numero_responderam,i,contf = 0,contm = 0;
 
-printf("digite o numero de pessoas que responderam as perguntas\n");
-scanf("%d", &n);
+printf("digite o numero de pessoas que responderam as perguntas\n");// solicitei quantas pessoas responderam  a pesquisa.
+scanf("%d", &numero_responderam);
 
-char *sexo = (char *)malloc(n * sizeof(char));
-int *op = (int *)malloc(n * sizeof(int));
+char *sexo = (char *)malloc(numero_responderam * sizeof(char)); //declarando um ponteiro e alocando dinamicamente.
+int *op = (int *)malloc(numero_responderam * sizeof(int));      //declarando um ponteiro e alocando dinamicamente.
 
-for( i = 0; i < n; i++){
-   printf("digite o sexo do intrevistado F para Feminino e M pra masculino\n");
-    scanf(" %c", &sexo[i]);
-    printf("digite 0 pra nao gostou e 1 pra gostou\n");
+for( i = 0; i < numero_responderam; i++){
+   printf("digite o sexo do intrevistado F para Feminino e M pra masculino\n"); //pedindo o sexo.
+    scanf(" %c", &sexo[i]);             
+    printf("digite 0 pra nao gostou e 1 pra gostou\n"); // perguntando se gostou ou nao gostou.
     scanf("%d", &op[i]);
 }
 
 int j;
-for( j = 0; j < n; j++){
-
-if ((sexo[j] == 'F') && (op[j] == 1)){ contf++;}
-if ((sexo[j] == 'M') && (op[j] == 0)){ contm++;}
-
+for( j = 0; j < numero_responderam; j++){
+if ((sexo[j] == 'F') && (op[j] == 1)){ contf++;} // verificando se é mulher. 
+if ((sexo[j] == 'M') && (op[j] == 0)){ contm++;} // verificando se é homem. 
 }
 
 float FM, MM;
-FM = (contf*100)/n;
-MM = (contm*100)/n;
-system("cls");
-printf("A porcentagem de pessoas do sexo feminino : %.2f%%\n",FM);
-printf("A porcentagem de pessoas do sexo masculino : %.2f%%\n",MM);
+FM = (contf*100)/numero_responderam;    //porcentagem de mulheres que gostaram do produto
+MM = (contm*100)/numero_responderam;    //a porcentagem de homems que não gostaram do produto.
+system("cls");  
+printf("porcentagem de pessoas do sexo feminino que responderam que gostaram do produto : %.2f%%\n",FM);
+printf("porcentagem de pessoas do sexo masculino que responderam que não gostaram do produto : %.2f%%\n",MM);
 
-free(sexo);
-free(op);
+free(sexo); //liberando a memória.
+free(op); //liberando a memória.
 
 }
