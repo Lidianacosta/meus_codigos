@@ -12,6 +12,7 @@ typedef union escolha{
 }Escolha;
 
 typedef struct produto{
+    char nome[20];
     float preco;
     Escolha escolha
 }Produto;
@@ -21,9 +22,14 @@ int main(void){
     int op;
     Produto produto;
 
+    printf("digite o nome do produto");
+    scanf(" %[^\n]s",produto.nome);
+    
     printf("digite o produto que vai querer \n");
     printf("1 para alimwnto 2 para bebida e 3 para eletronico : ");
     scanf("%d",&op);
+
+        
 
     switch (op)
     {
