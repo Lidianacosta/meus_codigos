@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+
 
 #define MAX_VAGAS 3
 #define MAX_TURMAS 2
@@ -42,8 +45,8 @@ Turma *procura_turma(Turma **turmas, int n, char id);
 
 int main()
 {
-    int op, i = 0, count, cont_alunos,cont_turmas, mat;
-    char id;
+    int op, i = 0, count, cont_alunos,cont_turmas,mat,cont_id;
+    char id,nome[50];
     Turma **turmas = (Turma **)malloc(MAX_TURMAS * sizeof(Turma *));
 
     do
@@ -61,6 +64,7 @@ int main()
                 printf("digite o id da turma que deseja cadastrar: ");
                 scanf(" %c", &id);
                 turmas[i] = cria_turma(id);
+                i++; 
             } 
             else
             {
@@ -71,22 +75,42 @@ int main()
                     imprime_turmas(turmas,i);
             break;
         case 3:
-        for(cont_turmas = 0 ;cont_turmas<i;cont_turmas++){
-            for(cont_alunos = 0 ;cont_alunos<i;cont_alunos++){
+            for(cont_turmas = 0 ;cont_turmas<i;cont_turmas++){
+                for(cont_alunos = 0 ;cont_alunos<MAX_VAGAS;cont_alunos++){
 
-        if (turmas[cont_turmas]->alunos[cont_alunos] == NULL){
+                  if (turmas[cont_turmas]->alunos[cont_alunos] == NULL){
              
-              
+                         printf("digite o id: ");
+                         scanf(" %c",&id);
+              	
+		        	for(cont_id;cont_id<i;cont_id++){
+			  	        if (turmas[cont_turmas]->id == id){
+			  
+            	
+              	        printf("digite o nome do aluno: ");
+               	        scanf(" %[^\n]s",nome);
+                
+                    	printf("digite a matricula : ");
+                    	scanf("%d",&mat);
+                    	//printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+             	  
+             	        matricula_aluno(turmas[cont_id],mat,nome);
+         	        	}  
+		             }
 
-        }
+                 }else{
+                     printf("sem vagas nas turmas!");
+                 }   
 
-        }
+              }       
+                
+            }
 
-        matricula_aluno(turma[],mat, *nome);
+       
         
         break;
         }
-        i++;
+       
     } while (op != 6);
 
     for (count = 0; count < MAX_TURMAS; count++)
@@ -99,7 +123,7 @@ int main()
 }
 //=======================================
 //                funções
-void menu(void)
+ void menu(void)
 {
     printf("\nMENU:\n");
     printf("1 – Criar turma\n");
@@ -142,5 +166,36 @@ void imprime_turmas(Turma **turmas, int n){
 }
 
 void matricula_aluno(Turma *turma, int mat, char *nome){
+    //printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
 
+int cont_verifica_null,verifica_aluno_notas;
+
+	for(cont_verifica_null = 0;cont_verifica_null <MAX_VAGAS;cont_verifica_null++){
+	printf("a\t");
+		if(turma->alunos[cont_verifica_null] == NULL){
+	printf("aaaaaaaaa\t");
+	
+		turma->alunos[cont_verifica_null]->mat = mat;
+		printf("aaaaaaaaa\t");
+		
+		strcpy(nome,turma->alunos[cont_verifica_null]->nome);
+			printf("aaaaaaaaa\n");
+			
+			
+			verifica_aluno_notas = cont_verifica_null;
+		}
+
+	}
+
+for(cont_verifica_null = 0;cont_verifica_null <MAX_VAGAS;cont_verifica_null++){
+		turma->alunos[verifica_aluno_notas]->notas[cont_verifica_null] = 0;	
+	}
+	
+	printf("aluno cadastrado com sucesso!");
+	
+	turma->vagas-=1;
 }
+
+
+
+
