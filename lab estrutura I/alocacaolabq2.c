@@ -4,41 +4,43 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define T 3
+#define T 3 // tamanho da matriz
 
 int main (void){
     
     int linha,coluna;
     
-    int **m = (int **) malloc(T*sizeof(int*));
-        if(m==NULL){ 
+    int **m = (int **) malloc(T*sizeof(int*));         // alocando uma matriz dinamicamente 
+        
+        if(m==NULL){        //verificando se nao deu erro na alocaçao 
         printf("Erro");
         exit(1);
         } 
 
-    for(linha=0; linha<T; linha++){
+    for(linha=0; linha<T; linha++){     // alocando as linhas da matriz 
+
        m [linha]= (int *) malloc(T*sizeof(int));
 
-        if(m[linha]==NULL){ 
+        if(m[linha]==NULL){  //verificando se nao deu erro na alocaçao
         printf("Erro");
         exit(1);
         } 
     }
 
-    for(linha=0; linha<T; linha++){
+    for(linha=0; linha<T; linha++){         
      for(coluna =0;coluna<T;coluna++){
     
-        m[linha][coluna] = linha*T + coluna;
+        m[linha][coluna] = linha*T + coluna;    // atribuindo o indice da posiçao a matriz 
        
-        printf("%d\t",m[linha][coluna]);
+        printf("%d\t",m[linha][coluna]);// mostrando o conteudo da matriz da matriz 
 
      }
     }
 
-     for(linha=0; linha<T; linha++){
+     for(linha=0; linha<T; linha++){            // liberando memoria
          free( m [linha]);
       }
-        free(m);
+        free(m);        // liberando memoria
 
       return(0);
 }
