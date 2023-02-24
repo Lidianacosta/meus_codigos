@@ -200,79 +200,78 @@ void imprime_turmas(Turma **turmas, int n)  // mostra as turmas as vagas que tem
 
     printf("\nTURMAS:\n");
 
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++)         
     {
-        qtd_vagas = 0;
+        qtd_vagas = 0;// inicializa as qtd de vags a cada interaçao do for de fora 
         for (count = 0; count < MAX_VAGAS; count++)
         {
-            if (turmas[i]->alunos[count] == NULL)
+            if (turmas[i]->alunos[count] == NULL)   // verifica se ha vagas para alunos na turma
             {
-                qtd_vagas++;    
+                qtd_vagas++;    //somandos as vagas disponiveis 
             }
         }
-        turmas[i]->vagas = qtd_vagas;   // 
-        printf("Turma %c – %d vagas disponíveis: \n", turmas[i]->id, turmas[i]->vagas);
+        turmas[i]->vagas = qtd_vagas;   // adicionando as vagas disponiveis a turma
+        printf("Turma %c – %d vagas disponíveis: \n", turmas[i]->id, turmas[i]->vagas); // mostra e as vagas 
     }
 }
 
-void matricula_aluno(Turma *turma, int mat, char *nome)
+void matricula_aluno(Turma *turma, int mat, char *nome) // matricula alunos em uma turma 
 {
-    Aluno *criando_espaco_aluno = (Aluno *)malloc(sizeof(Aluno));
-    int cont_verifica_null, cont_inicializa;
+    Aluno *criando_espaco_aluno = (Aluno *)malloc(sizeof(Aluno));   //alocando dinamicamente uma estrutura aluno 
+    int cont_verifica_null, cont_inicializa; // variaveis auxiliares
 
-    for (cont_inicializa = 0; cont_inicializa < QTD_NOTAS; cont_inicializa++)
+    for (cont_inicializa = 0; cont_inicializa < QTD_NOTAS; cont_inicializa++)  // inicializando as suas notaas com zero  
     {
         criando_espaco_aluno->notas[cont_inicializa] = 0;
     }
-    criando_espaco_aluno->media = 0;
-
-    criando_espaco_aluno->mat = mat;
-
-    strcpy(criando_espaco_aluno->nome, nome);
+    
+    criando_espaco_aluno->media = 0;// inicializando a media com zero  
+    criando_espaco_aluno->mat = mat; // passando a mantricula que foi pedida na main
+    strcpy(criando_espaco_aluno->nome, nome);// passando o nome do aluno que foi pedido na main 
 
     for (cont_verifica_null = 0; cont_verifica_null < MAX_VAGAS; cont_verifica_null++)
     {
-        if (turma->alunos[cont_verifica_null] == NULL)
+        if (turma->alunos[cont_verifica_null] == NULL)  // verifica se a turma->alunos tem lugar para colocar um novo aluno 
         {
-            turma->alunos[cont_verifica_null] = criando_espaco_aluno;
+            turma->alunos[cont_verifica_null] = criando_espaco_aluno;// colocando o aluno criado em um lugar no vertor de alunos de uma turma  
             break;
         }
     }
 
-    printf("aluno cadastrado com sucesso!");
+    printf("aluno cadastrado com sucesso!");    // mostra que o aluno foi cadastrados com sucesso 
 
-    turma->vagas -= 1;
+    turma->vagas -= 1;      // reduzindo a qtd de vagas a cada novo aluno cadastrado 
 }
 
-Turma *procura_turma(Turma **turmas, int n, char id)
+Turma *procura_turma(Turma **turmas, int n, char id)    // uma funçao que ajuda a achar uma turma pelo seu id 
 {
     int cont_turmas;
 
-    for (cont_turmas = 0; cont_turmas < n; cont_turmas++)
+    for (cont_turmas = 0; cont_turmas < n; cont_turmas++)   // verifica se o id dado é igual ao da turma 
     {
         if (turmas[cont_turmas]->id == id)
         {
-            return (turmas[cont_turmas]);
+            return (turmas[cont_turmas]); // retorna a turma encontrada 
         }
     }
 
-    return (NULL);
+    return (NULL);  // retorna null se nao for encontrada a turma 
 }
 
-void lanca_notas(Turma *turma)
+void lanca_notas(Turma *turma)      // pede as notas de uma turma 
 {
     int cont_alunos, cont_notas;
-    float soma;
+    float soma = 0; // varialvel usada para soma as notas
 
-    for (cont_alunos = 0; cont_alunos < MAX_VAGAS; cont_alunos++)
+    for (cont_alunos = 0; cont_alunos < MAX_VAGAS; cont_alunos++)  // for de fora para caminha de aluno em aluno  
     {
-        if (turma->alunos[cont_alunos] != NULL)
+        if (turma->alunos[cont_alunos] != NULL)     // verificando se tem alunos  na turma 
         {
-            printf("digite as notas do aluno : %s matricula: %d\n", turma->alunos[cont_alunos]->nome, turma->alunos[cont_alunos]->mat);
+            printf("digite as notas do aluno : %s matricula: %d\n", turma->alunos[cont_alunos]->nome, turma->alunos[cont_alunos]->mat); // diz o nome e a matricula do aluno cadastrado na turma 
 
-            for (cont_notas = 0; cont_notas < QTD_NOTAS; cont_notas++)
+            for (cont_notas = 0; cont_notas < QTD_NOTAS; cont_notas++) // for de dentro para caminha entre as notas 
             {
-                printf("digite  a nota n° %d: ", cont_notas + 1);
+                printf("digite  a nota n° %d: ", cont_notas + 1);   // pede as notas do aluno 
                 scanf("%f", &turma->alunos[cont_alunos]->notas[cont_notas]);
             }
         }
@@ -280,21 +279,20 @@ void lanca_notas(Turma *turma)
 
     for (cont_alunos = 0; cont_alunos < MAX_VAGAS; cont_alunos++)
     {
-        if (turma->alunos[cont_alunos] != NULL)
+        if (turma->alunos[cont_alunos] != NULL) // verificando se tem aluno cadastrado na turma 
         {
-            soma = 0;
+            soma = 0;   // inicilizando soma com zero a cada interaçao do laço para nao misturar as notas dos alunos
             for (cont_notas = 0; cont_notas < QTD_NOTAS; cont_notas++)
             {
-
-                soma += turma->alunos[cont_alunos]->notas[cont_notas];
+                soma += turma->alunos[cont_alunos]->notas[cont_notas];  // somando as notas
             }
-            turma->alunos[cont_alunos]->media = soma / QTD_NOTAS;
+            turma->alunos[cont_alunos]->media = soma / QTD_NOTAS; // fazendo a media e guardado a no campo media do aluno  
         }
     }
 }
 
-void imprime_alunos(Turma *turma)
-{
+void imprime_alunos(Turma *turma)   // mostra todos os alunos matriculados em uma turma  
+ {
 
     int cont_alunos,verifica_null=0;    // variaveis uma para o laço de repetiçao e outra para auxiliar
 
