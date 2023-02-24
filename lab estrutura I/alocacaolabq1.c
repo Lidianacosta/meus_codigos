@@ -4,23 +4,24 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define N 10
+#define N 10    // tamanho do vetor 
 
 int main (void){
 
     int cont;
-    int *v = (int*)malloc(N*sizeof(int));
+    int *v = (int*)malloc(N*sizeof(int)); // alocando dinamicamente um vetor de N POSIÇOES 
 
-    if (v == NULL){
+    if (v == NULL){         // verificando se deu erro 
         printf("ERRO");
         exit(1);
     }
 
-    for (cont = 0; cont < N; cont++){
+    for (cont = 0; cont < N; cont++){   // mostrando os elementos 
         *(v + cont) = cont;
         printf("%d\t",*(v + cont));
+        
     }
 
-    free(v);
+    free(v);   //liberando a memoria 
     return(0);
 }
