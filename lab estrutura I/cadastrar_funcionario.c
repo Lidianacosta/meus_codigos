@@ -41,7 +41,7 @@ int main() {
     free(funcionario);  //Liberando a memória 
 }
 
-void preencher(Dados_funcionarios *f,int qtd) {
+void preencher(Dados_funcionarios *f,int qtd) {  // pede ao usuario os dados do funcionario e quaarda na variavel f 
     int i;
     for(i =0; i<qtd; i++) {
         printf("nome do %d° funcionário \n", i+1);
@@ -88,7 +88,7 @@ void modifica_salario(Dados_funcionarios *f,int qtd) { // muda o salario dos fun
     }
 }
 
-void verificar_salario(Dados_funcionarios *f,int qtd) {
+void verificar_salario(Dados_funcionarios *f,int qtd) {     // verifica qual e o maiot salario e o nome do funcionario e mostra 
 
     int idx_maior, idx_menor,i;
     float veri_maior,veri_menor;
