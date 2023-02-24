@@ -7,13 +7,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef enum mes{JANEIRO = 01, FEVEREIRO, MARCO, ABRIL, MAIO,JUNHO,JULHO, AGOSTO, SETEMBRO, OUTUBRO, NOVEMBRO ,DEZEMBRO}Mes;
+typedef enum mes{JANEIRO = 01, FEVEREIRO, MARCO, ABRIL, MAIO,JUNHO,JULHO, AGOSTO, SETEMBRO, OUTUBRO, NOVEMBRO ,DEZEMBRO}Mes; // meses dos anos 
 
-typedef struct data{
+typedef struct data{  // guarda a o ano o dia e o mes 
 
     char dia[3];
     char ano[5];
-    Mes mes ;
+    Mes mes ;  // enum Mes 
 
 }Data;
 
@@ -21,17 +21,18 @@ typedef struct data{
 
 int main(void){
 
-    Data data;
+    Data data;  // criando a variavel 
     
-    printf("digite o dia : ");
+    printf("digite o dia : ");  //prenchendo seus campos
     scanf(" %[^\n]s",data.dia);
     printf("digite o mes : ");
     scanf("%d",(int *)&data.mes);
     printf("digite o ano : ");
     scanf(" %[^\n]s",data.ano);
 
-    printf("\nDADOS :   ");
+    printf("\nDADOS :   "); //mostrando seus campos
     printf("%s /",data.dia);
+  
     if(data.mes<10){
      printf("0%d /",data.mes);
     }else{
