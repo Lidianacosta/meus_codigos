@@ -11,13 +11,12 @@ int calcula (int x, int y, int (*operacao)(x,y)){    // funçao que chamar a fun
 } 
 
 int main(){
-
-printf("digite os numeros para fazer a somatoria!\n");
 int t,tt;
+ 
+printf("digite os numeros para fazer a somatoria!\n");// pedindo os numeros 
+scanf("%d %d",&t,&tt); // lendo os numeros
 
-scanf("%d %d",&t,&tt);
-
- int resultado = calcula(t,tt,soma); // chamndoa funçao calcua passando dois inteiros e a funçao soma como parametros
+ int resultado = calcula(t,tt,soma); // chamando a funçao calcua passando dois inteiros e a funçao soma como parametros
 
  printf("resultado: %d\n",resultado); // imprimindo o resultado
     return (0);
