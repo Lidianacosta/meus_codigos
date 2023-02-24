@@ -52,8 +52,9 @@ int main()
     do              // estrutura do-while para continuar o loop ate que a pessoa digite sair "6"
     {
         menu();  // mostra um mini menu
-        printf("digite sua opção: ");       // pede a op para pessoa e o guarda na variavel op
+        printf("digite sua opcao: ");       // pede a op para pessoa e o guarda na variavel op
         scanf("%d", &op);
+        printf("\n");
 
         switch (op)     //   escolhi usa pois achei mais organizado 
         {
@@ -72,12 +73,12 @@ int main()
             }
             break;
         case 2:
-            imprime_turmas(turmas, i);              // imprimindo se a vagas nas turmas 
+            imprime_turmas(turmas, i);   // imprimindo se a vagas nas turmas 
             break;
         case 3:
             for (cont_turmas = 0; cont_turmas < i; cont_turmas++)   //  verificar quantas turmas foram criadas 
             {
-                if (turmas[cont_turmas]->vagas != 0)
+                if (turmas[cont_turmas]->vagas != 0)    // se 
                 {
                     printf("digite o id: ");
                     scanf(" %c", &id);
@@ -90,84 +91,85 @@ int main()
                         break;
                     }
 
-                    printf("digite o nome do aluno: ");
+                    printf("digite o nome do aluno: "); // nome do aluno que deseja cadastra na hora 
                     scanf(" %[^\n]s", nome);
 
-                    printf("digite a matricula : ");
+                    printf("digite a matricula : ");   // matricula do aluno que deseja cadastra na hora 
                     scanf("%d", &mat);
 
-                    matricula_aluno(turma_procurada, mat, nome);
+                    matricula_aluno(turma_procurada, mat, nome); // chama a funçao que se encarrega de matricular o novo aluno em uma turma ja criada
                     break;
                 }
                 else
                 {
-                    printf("sem vagas nas turmas!");
+                    printf("sem vagas nas turmas!");    // mostra que nao tem mais vagas  
                     break;
                 }
             }
 
             if (i == 0)    // verifica se foram criadas turmas 
             {
-                printf("\nnenhuma turma cadastrada!\n");    // diz que nao 
+                printf("\nnenhuma turma cadastrada!\n");    // diz que nao tem nenhuma turma 
             }
             break;
 
         case 4:
 
-            printf("digite o id: ");
+            printf("digite o id: ");    // pedindo o id da turma que deseja cadastra as notas 
             scanf(" %c", &id);
 
-            turma_procurada = procura_turma(turmas, i, id);
+            turma_procurada = procura_turma(turmas, i, id); // chama a funçao para procurar a  turma pelo id 
 
-            if (turma_procurada == NULL)
+            if (turma_procurada == NULL)   // verifica se a turma foi retornada com sucesso
             {
                 printf("TURMA INEXISTENTE!");
                 break;
             }
 
-            lanca_notas(turma_procurada);
+            lanca_notas(turma_procurada);   // cadastra as notas de alunos matriculados em uma turma 
 
             break;
         case 5:
-
-            if (turmas[cont_turmas]->vagas != 0)
-            {
-                printf("digite o id: ");
+                printf("digite o id: ");  //pedindo o id da turma para imprimir os alunos e seus dados 
                 scanf(" %c", &id);
 
-                turma_procurada = procura_turma(turmas, i, id);
+                turma_procurada = procura_turma(turmas, i, id);// chama a funçao para procurar a  turma pelo id e guarda em uma variavel(ponteiro) turma auxiliar(turma_procurada) o endereço para a turma encontrada  
 
-                if (turma_procurada == NULL)
+                if (turma_procurada == NULL)    // verifica se a turma foi retornada com sucesso
                 {
-                    printf("id invalido!");
+                    printf("turma inexistente");
                     break;
                 }
-                imprime_alunos(turma_procurada);
+                imprime_alunos(turma_procurada);   // chama para imprimir os alunos e seus dados passando como parametro o endereço da turma encontrada 
+            break;
 
-                break;
-            }
-
-        default:
-            printf("opcao invalida!");
+        default:    // caso escolha a op que nao tem no menu
+            printf("opcao invalida!");  
             break;
         }
-    } while (op != 6);
+    } while (op != 6);  // fim do do-while que se encerrar quando digite a op 6 que no menu diz sair 
 
-    printf("Obrigado por usar este programa!");
+    printf("Obrigado por usar este programa!"); // mostra que o programa foi encerrado 
 
 
-    for (count_free = 0; count_free < MAX_TURMAS; count_free++)
+    for (count_free = 0; count_free < MAX_TURMAS; count_free++) // liberando os espaços que alocou matriculando os alunos 
     {
         for(count2_free = 0 ;count2_free<MAX_VAGAS;count2_free++){
         free(turmas[count_free]->alunos[count2_free]);
     }}
 
-    free(turmas);
+    for (count_free = 0; count_free < MAX_TURMAS; count_free++)// liberando os espaços que alocou criando as turmas  
+    {   
+        free(turmas[count_free]);
+    }
+
+    free(turmas);   // / liberando os espaços que alocou para guardar as turmas 
     return 0;
 }
+
 //=======================================
 //                funções
-void menu(void)
+void menu(void)     // mini menu 
 {
     printf("\nMENU:\n");
     printf("1 – Criar turma\n");
@@ -175,27 +177,29 @@ void menu(void)
     printf("3 – Matricular aluno\n");
     printf("4 – Lancar notas\n");
     printf("5 – Listar alunos\n");
-    printf("6 – Sair\n");
+    printf("6 – Sair\n\n");
 }
 
 Turma *cria_turma(char id)
 {
     int count;
-    Turma *turma = (Turma *)malloc(MAX_VAGAS * sizeof(Turma));
-    turma->vagas = MAX_VAGAS;
-    turma->id = id;
-    for (count = 0; count < MAX_VAGAS; count++)
+    Turma *turma = (Turma *)malloc(MAX_VAGAS * sizeof(Turma));  // alocando espaço para turma 
+    turma->vagas = MAX_VAGAS;   // adicionando as vags 
+    turma->id = id; // colocando seu id 
+    for (count = 0; count < MAX_VAGAS; count++)   // prencher seu campos com null
     {
         turma->alunos[count] = NULL;
     }
-    printf("Turma %c criada com sucesso!", id);
-    return (turma);
+    printf("Turma %c criada com sucesso!\n", id);   // dizendo que a turma foi criada com sucesso
+    return (turma); // retornando a turma criada
 }
 
-void imprime_turmas(Turma **turmas, int n)
+void imprime_turmas(Turma **turmas, int n)  // mostra as turmas as vagas que tem nelas 
 {
     int i, count, qtd_vagas;
-    printf("TURMAS: \n");
+
+    printf("\nTURMAS:\n");
+
     for (i = 0; i < n; i++)
     {
         qtd_vagas = 0;
@@ -203,11 +207,11 @@ void imprime_turmas(Turma **turmas, int n)
         {
             if (turmas[i]->alunos[count] == NULL)
             {
-                qtd_vagas++;
+                qtd_vagas++;    
             }
         }
-        turmas[i]->vagas = qtd_vagas;
-        printf("\nTurma %c – %d vagas disponíveis: \n", turmas[i]->id, turmas[i]->vagas);
+        turmas[i]->vagas = qtd_vagas;   // 
+        printf("Turma %c – %d vagas disponíveis: \n", turmas[i]->id, turmas[i]->vagas);
     }
 }
 
@@ -220,6 +224,7 @@ void matricula_aluno(Turma *turma, int mat, char *nome)
     {
         criando_espaco_aluno->notas[cont_inicializa] = 0;
     }
+    criando_espaco_aluno->media = 0;
 
     criando_espaco_aluno->mat = mat;
 
@@ -291,14 +296,21 @@ void lanca_notas(Turma *turma)
 void imprime_alunos(Turma *turma)
 {
 
-    int cont_alunos;
-    for (cont_alunos = 0; cont_alunos < MAX_VAGAS; cont_alunos++)
+    int cont_alunos,verifica_null=0;    // variaveis uma para o laço de repetiçao e outra para auxiliar
+
+    for (cont_alunos = 0; cont_alunos < MAX_VAGAS; cont_alunos++)   // mostra os alunos cadastrados  
     {
-        if (turma->alunos[cont_alunos] != NULL)
+        if (turma->alunos[cont_alunos] != NULL)     // verifica se tem alunos 
         {
             printf("nome: %s\n", turma->alunos[cont_alunos]->nome);
             printf("matricula: %d\n", turma->alunos[cont_alunos]->mat);
             printf("media: %f\n", turma->alunos[cont_alunos]->media);
+                 verifica_null++;   // auxilia na verificação se tem alunos cadastrados 
         }
     }
+         
+        if(verifica_null == 0){      //verifica se tem alunos cadastrados 
+
+            printf("nenhum aluno cadastrado");  
+        }
 }
