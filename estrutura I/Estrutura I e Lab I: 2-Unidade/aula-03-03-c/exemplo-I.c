@@ -1,19 +1,13 @@
 #include<stdio.h>
 
 int main(void){
-    int c;
-    FILE* fp = fopen("arquivo.txt","rt");
-    
+    FILE* fp = fopen("arquivo.txt","wt");
     if(fp == NULL){
         printf("error ao abrir o programa");
         return(1);
     }
 
-    //while (!feof(fp)){
-        c = fgetc(fp);
-        printf("%c", c);
-   // }
-
+    fputc('A', fp);
     fclose(fp);
     return(0);
 }
