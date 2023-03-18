@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include "contabancaria.h"
 
 typedef struct contabancaria{ 
     char titular[51];
@@ -11,7 +12,7 @@ typedef struct contabancaria{
 ContaBancaria* cria_conta(char* titular, int numero_conta, float saldo){
     ContaBancaria* conta = (ContaBancaria*)malloc(sizeof(ContaBancaria));
     if (conta == NULL){
-        printf("erro sem espaço na memoria!\n");
+        printf("erro sem espaÃ§o na memoria!\n");
         exit(1);
     }
     strcpy(conta->titular,titular);
@@ -47,4 +48,8 @@ float saldo(ContaBancaria* conta){
 
 void exclui_conta(ContaBancaria* conta){
     free(conta);
+}
+
+void imprimir(ContaBancaria* conta){
+    printf("%s seu saldo Ã©: %.2f\n",conta->titular,saldo(conta));
 }
