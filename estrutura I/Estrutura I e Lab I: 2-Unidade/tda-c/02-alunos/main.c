@@ -1,40 +1,42 @@
-#include<stdio.h>
-#include"aluno.c"
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "aluno.h"
 
+#define QTD_ALUNOS 5
 
-#define QTD_ALUNOS 2
+int main(void) {
+  int cont_alunos;
+  char nome[50];
+  float nota;
+  FILE* fp = fopen("saida.txt", "wt");
+  if(fp == NULL){
+    printf("erro ao abrir o arquivo\n");
+    exit(1);
+  }
+  Aluno** alunos = (Aluno**)malloc(QTD_ALUNOS * sizeof(Aluno*));
+  if(alunos == NULL){
+    printf("sem armazenamento suficiente\n");
+  exit(1);
+  }
+  for(cont_alunos=0; cont_alunos < QTD_ALUNOS; cont_alunos++){
+    printf("digite o nome e a nota  do aluno %d°",cont_alunos+1);
+    scanf(" %s %f", nome, &nota);
+  alunos[cont_alunos] = aluno_cria(nome, nota);
+  }
 
-int main(void){
-    int cont_alunos_criados = 0;
-    Aluno **alunos = (Aluno**)malloc(QTD_ALUNOS* sizeof(Aluno*));
-    if (alunos == NULL){
-        printf("erro!\n");
-        exit(1);
-    }
+  for(cont_alunos=0; cont_alunos < QTD_ALUNOS; cont_alunos++){
+    printf("nome e a nota  do aluno %d°\n",cont_alunos+1);
+  
+  aluno_imprime(alunos[cont_alunos]);  
+  }
 
-    Aluno *aluno_procurado;
+  aluno_salva(fp,QTD_ALUNOS,alunos);
 
-    char nome[] ="lidiana";
-
-    alunos[cont_alunos_criados] = aluno_cria(nome , 10);
-    cont_alunos_criados++;
-    aluno_procurado =  procura_Aluno(alunos,nome);
-    aluno_imprime(aluno_procurado);
-
-    aluno_libera();
-
-    return(0);
-}   
-    // do
-    // {
-    //        switch (op)
-    // {
-    // case /* constant-expression */:
-    //     /* code */
-    //     break;
-    
-    // default:
-    //     break;
-    // } 
-    // } while (op != 6);
+  
+  for(cont_alunos=0; cont_alunos<QTD_ALUNOS; cont_alunos++){
+aluno_libera(alunos[cont_alunos]);
+  }
+  free(alunos);
+  printf("programa finalizado\n");
+  return 0;
+}
