@@ -1,4 +1,4 @@
-typedef struct ContaBancaria ContaBancaria;
+typedef struct contabancaria ContaBancaria;
 
 ContaBancaria* cria_conta(char* titular, int numero_conta, float saldo);
 
@@ -11,3 +11,5 @@ void transfere(ContaBancaria* conta_trasfere, ContaBancaria* conta_recebe, float
 float saldo(ContaBancaria* conta);
 
 void exclui_conta(ContaBancaria* conta);
+
+void imprimir(ContaBancaria* conta);
