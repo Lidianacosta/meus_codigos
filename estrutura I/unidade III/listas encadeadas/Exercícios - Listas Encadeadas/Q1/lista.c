@@ -57,3 +57,25 @@ void concatena(Lista* l1, Lista* l2){
     }
     ant->prox = l2;
 }
+
+Lista* retira_n(Lista* l, int n){
+   Lista* ant = NULL;
+   Lista* p = l;
+
+    do{
+        while ( p!= NULL && p->info != n){
+            ant = p;
+            p = p->prox;
+        }
+        if (p == NULL) return l;
+
+        if(ant == NULL) l = p->prox;
+
+        else ant->prox = p->prox;
+
+        free(p);
+        p = l;
+    } while ( p!= NULL);
+   
+    return l;
+}

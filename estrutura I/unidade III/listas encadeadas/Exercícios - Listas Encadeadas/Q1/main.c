@@ -16,7 +16,7 @@ int main(void){
     lst_imprime(l);
     l1 = lst_insere(l1,52);
     l1 = lst_insere(l1,41);
-    l1 = lst_insere(l1,51);
+    l1 = lst_insere(l1,23);
     printf("l1\n");
     lst_imprime(l1);
     elementos_maiores = maiores(l,10);
@@ -25,5 +25,8 @@ int main(void){
     printf("o ultimo elemento é %d\n",ult->info);
     concatena(l,l1);
     lst_imprime(l);
+    l = retira_n(l,23);
+    lst_imprime(l);
+
     return 0;
 }
