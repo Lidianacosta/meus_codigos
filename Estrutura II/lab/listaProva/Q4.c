@@ -9,14 +9,10 @@
 
 int isPerfect(int n){
     int soma =0, i;
-    for(i = 1; i < n; i++){
-        
+    for(i = 1; i < n; i++)
         if((n % i) == 0)
             soma += i;
-    }
-    
     return (soma == n);
-        
 }
 
 void imprimePerfeito(int inicio, int fim){
@@ -24,10 +20,7 @@ void imprimePerfeito(int inicio, int fim){
     for(i = inicio; i < fim; i++)
         if(isPerfect(i))
             printf("%d é Perfeito\n",i);
-    
-    
 }
-
 
 int main(){
     imprimePerfeito(1, 1000);

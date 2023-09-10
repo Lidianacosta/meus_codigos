@@ -13,7 +13,6 @@ int f(int m, int n){
     return  f(m, n - 1) + f(m - 1, n);
 }
 
-
 int main(){
     printf("valor = %d\n", f(2,3));
 }

@@ -11,8 +11,7 @@
 int isPitagorico(int limite){
     int a, b, i, j, c;
     for(i = 1; i <=limite; i++){
-        for(j = 1; j <= limite; j++){
-            
+        for(j = 1; j <= limite; j++){      
             a = pow(i,2);
             b = pow(j,2);
             c = sqrt(a+b);

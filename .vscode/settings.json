@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "arvore.h": "c"
+    },
+    "cmake.sourceDirectory": "/workspaces/meus_codigos/Estrutura II/lab/arvores/tentativa01"
+}

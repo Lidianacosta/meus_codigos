@@ -21,11 +21,9 @@ int inverterNumeros(int inverter){
     return invertido;
 }
 
-
 int main(){
     int inverter = 987654321, invertido = 0;
     printf("inverter: %d\n", inverter);
     printf("invertido: %d\n", inverterNumeros(inverter));
     printf("invertido Recursivo: %d\n", inverterNumerosRecursivo(inverter, invertido));
-
 }
