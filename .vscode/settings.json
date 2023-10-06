@@ -1,4 +1,5 @@
 {
+    "workbench.colorTheme": "OM Theme (Night Owl Italic)",
     "explorer.compactFolders": false,
-    
+    "workbench.iconTheme": "vscode-icons",
 }
